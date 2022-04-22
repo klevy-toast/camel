@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.pulsar;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.RuntimeCamelException;
@@ -25,6 +26,7 @@ import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriParams;
 import org.apache.pulsar.client.api.BatcherBuilder;
 import org.apache.pulsar.client.api.CompressionType;
+import org.apache.pulsar.client.api.KeySharedPolicy;
 import org.apache.pulsar.client.api.MessageRouter;
 import org.apache.pulsar.client.api.MessageRoutingMode;
 import org.apache.pulsar.client.api.RegexSubscriptionMode;
@@ -69,6 +71,12 @@ public class PulsarConfiguration implements Cloneable {
     private long ackGroupTimeMillis = 100;
     @UriParam(label = "consumer", defaultValue = "LATEST")
     private SubscriptionInitialPosition subscriptionInitialPosition = LATEST;
+    @UriParam(label = "consumer")
+    private KeySharedPolicy keySharedPolicy;
+    @UriParam(label = "consumer")
+    private boolean allowOutOfOrderDelivery;
+    @UriParam(label = "consumer")
+    private List keySharedRanges;
     @UriParam(label = "consumer", defaultValue = "false")
     private boolean readCompacted;
     @UriParam(label = "consumer",
@@ -367,6 +375,45 @@ public class PulsarConfiguration implements Cloneable {
 
     public BatcherBuilder getBatcherBuilder() {
         return batcherBuilder;
+    }
+
+    /**
+     * Control key-shared-policy of the Pulsar consumer. autoSplitHashRange automatically splits hashes among connected
+     * consumers. stickyHashRange sets each consumer to get a fixed hash range, which should cover the total allowed
+     * hashes. Default is null.
+     */
+    public void setKeySharedPolicy(KeySharedPolicy keySharedPolicy) {
+        this.keySharedPolicy = keySharedPolicy;
+    }
+
+    public KeySharedPolicy getKeySharedPolicy() {
+        return keySharedPolicy;
+    }
+
+    /**
+     * Control key-shared-policy of the Pulsar consumer. autoSplitHashRange automatically splits hashes among connected
+     * consumers. stickyHashRange sets each consumer to get a fixed hash range, which should cover the total allowed
+     * hashes. Default is null.
+     */
+    public void setAllowOutOfOrderDelivery(boolean allowOutOfOrderDelivery) {
+        this.allowOutOfOrderDelivery = allowOutOfOrderDelivery;
+    }
+
+    public boolean isAllowOutOfOrderDelivery() {
+        return allowOutOfOrderDelivery;
+    }
+
+    /**
+     * Control key-shared-policy of the Pulsar consumer. autoSplitHashRange automatically splits hashes among connected
+     * consumers. stickyHashRange sets each consumer to get a fixed hash range, which should cover the total allowed
+     * hashes. Default is null.
+     */
+    public void setKeySharedRanges(List keySharedRanges) {
+        this.keySharedRanges = keySharedRanges;
+    }
+
+    public List getKeySharedRanges() {
+        return keySharedRanges;
     }
 
     /**

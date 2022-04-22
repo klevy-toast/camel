@@ -34,6 +34,8 @@ public class PulsarComponentConfigurer extends PropertyConfigurerSupport impleme
         case "ackTimeoutMillis": getOrCreateConfiguration(target).setAckTimeoutMillis(property(camelContext, long.class, value)); return true;
         case "allowmanualacknowledgement":
         case "allowManualAcknowledgement": getOrCreateConfiguration(target).setAllowManualAcknowledgement(property(camelContext, boolean.class, value)); return true;
+        case "allowoutoforderdelivery":
+        case "allowOutOfOrderDelivery": getOrCreateConfiguration(target).setAllowOutOfOrderDelivery(property(camelContext, boolean.class, value)); return true;
         case "authenticationclass":
         case "authenticationClass": getOrCreateConfiguration(target).setAuthenticationClass(property(camelContext, java.lang.String.class, value)); return true;
         case "authenticationparams":
@@ -67,6 +69,10 @@ public class PulsarComponentConfigurer extends PropertyConfigurerSupport impleme
         case "deadLetterTopic": getOrCreateConfiguration(target).setDeadLetterTopic(property(camelContext, java.lang.String.class, value)); return true;
         case "initialsequenceid":
         case "initialSequenceId": getOrCreateConfiguration(target).setInitialSequenceId(property(camelContext, long.class, value)); return true;
+        case "keysharedpolicy":
+        case "keySharedPolicy": getOrCreateConfiguration(target).setKeySharedPolicy(property(camelContext, org.apache.pulsar.client.api.KeySharedPolicy.class, value)); return true;
+        case "keysharedranges":
+        case "keySharedRanges": getOrCreateConfiguration(target).setKeySharedRanges(property(camelContext, java.util.List.class, value)); return true;
         case "lazystartproducer":
         case "lazyStartProducer": target.setLazyStartProducer(property(camelContext, boolean.class, value)); return true;
         case "maxpendingmessages":
@@ -127,6 +133,8 @@ public class PulsarComponentConfigurer extends PropertyConfigurerSupport impleme
         case "ackTimeoutMillis": return long.class;
         case "allowmanualacknowledgement":
         case "allowManualAcknowledgement": return boolean.class;
+        case "allowoutoforderdelivery":
+        case "allowOutOfOrderDelivery": return boolean.class;
         case "authenticationclass":
         case "authenticationClass": return java.lang.String.class;
         case "authenticationparams":
@@ -160,6 +168,10 @@ public class PulsarComponentConfigurer extends PropertyConfigurerSupport impleme
         case "deadLetterTopic": return java.lang.String.class;
         case "initialsequenceid":
         case "initialSequenceId": return long.class;
+        case "keysharedpolicy":
+        case "keySharedPolicy": return org.apache.pulsar.client.api.KeySharedPolicy.class;
+        case "keysharedranges":
+        case "keySharedRanges": return java.util.List.class;
         case "lazystartproducer":
         case "lazyStartProducer": return boolean.class;
         case "maxpendingmessages":
@@ -216,6 +228,8 @@ public class PulsarComponentConfigurer extends PropertyConfigurerSupport impleme
         case "ackTimeoutMillis": return getOrCreateConfiguration(target).getAckTimeoutMillis();
         case "allowmanualacknowledgement":
         case "allowManualAcknowledgement": return getOrCreateConfiguration(target).isAllowManualAcknowledgement();
+        case "allowoutoforderdelivery":
+        case "allowOutOfOrderDelivery": return getOrCreateConfiguration(target).isAllowOutOfOrderDelivery();
         case "authenticationclass":
         case "authenticationClass": return getOrCreateConfiguration(target).getAuthenticationClass();
         case "authenticationparams":
@@ -249,6 +263,10 @@ public class PulsarComponentConfigurer extends PropertyConfigurerSupport impleme
         case "deadLetterTopic": return getOrCreateConfiguration(target).getDeadLetterTopic();
         case "initialsequenceid":
         case "initialSequenceId": return getOrCreateConfiguration(target).getInitialSequenceId();
+        case "keysharedpolicy":
+        case "keySharedPolicy": return getOrCreateConfiguration(target).getKeySharedPolicy();
+        case "keysharedranges":
+        case "keySharedRanges": return getOrCreateConfiguration(target).getKeySharedRanges();
         case "lazystartproducer":
         case "lazyStartProducer": return target.isLazyStartProducer();
         case "maxpendingmessages":

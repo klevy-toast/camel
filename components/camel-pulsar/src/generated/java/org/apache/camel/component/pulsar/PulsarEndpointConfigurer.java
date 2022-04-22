@@ -27,6 +27,8 @@ public class PulsarEndpointConfigurer extends PropertyConfigurerSupport implemen
         case "ackTimeoutMillis": target.getPulsarConfiguration().setAckTimeoutMillis(property(camelContext, long.class, value)); return true;
         case "allowmanualacknowledgement":
         case "allowManualAcknowledgement": target.getPulsarConfiguration().setAllowManualAcknowledgement(property(camelContext, boolean.class, value)); return true;
+        case "allowoutoforderdelivery":
+        case "allowOutOfOrderDelivery": target.getPulsarConfiguration().setAllowOutOfOrderDelivery(property(camelContext, boolean.class, value)); return true;
         case "authenticationclass":
         case "authenticationClass": target.getPulsarConfiguration().setAuthenticationClass(property(camelContext, java.lang.String.class, value)); return true;
         case "authenticationparams":
@@ -59,6 +61,10 @@ public class PulsarEndpointConfigurer extends PropertyConfigurerSupport implemen
         case "exchangePattern": target.setExchangePattern(property(camelContext, org.apache.camel.ExchangePattern.class, value)); return true;
         case "initialsequenceid":
         case "initialSequenceId": target.getPulsarConfiguration().setInitialSequenceId(property(camelContext, long.class, value)); return true;
+        case "keysharedpolicy":
+        case "keySharedPolicy": target.getPulsarConfiguration().setKeySharedPolicy(property(camelContext, org.apache.pulsar.client.api.KeySharedPolicy.class, value)); return true;
+        case "keysharedranges":
+        case "keySharedRanges": target.getPulsarConfiguration().setKeySharedRanges(property(camelContext, java.util.List.class, value)); return true;
         case "lazystartproducer":
         case "lazyStartProducer": target.setLazyStartProducer(property(camelContext, boolean.class, value)); return true;
         case "maxpendingmessages":
@@ -110,6 +116,8 @@ public class PulsarEndpointConfigurer extends PropertyConfigurerSupport implemen
         case "ackTimeoutMillis": return long.class;
         case "allowmanualacknowledgement":
         case "allowManualAcknowledgement": return boolean.class;
+        case "allowoutoforderdelivery":
+        case "allowOutOfOrderDelivery": return boolean.class;
         case "authenticationclass":
         case "authenticationClass": return java.lang.String.class;
         case "authenticationparams":
@@ -142,6 +150,10 @@ public class PulsarEndpointConfigurer extends PropertyConfigurerSupport implemen
         case "exchangePattern": return org.apache.camel.ExchangePattern.class;
         case "initialsequenceid":
         case "initialSequenceId": return long.class;
+        case "keysharedpolicy":
+        case "keySharedPolicy": return org.apache.pulsar.client.api.KeySharedPolicy.class;
+        case "keysharedranges":
+        case "keySharedRanges": return java.util.List.class;
         case "lazystartproducer":
         case "lazyStartProducer": return boolean.class;
         case "maxpendingmessages":
@@ -194,6 +206,8 @@ public class PulsarEndpointConfigurer extends PropertyConfigurerSupport implemen
         case "ackTimeoutMillis": return target.getPulsarConfiguration().getAckTimeoutMillis();
         case "allowmanualacknowledgement":
         case "allowManualAcknowledgement": return target.getPulsarConfiguration().isAllowManualAcknowledgement();
+        case "allowoutoforderdelivery":
+        case "allowOutOfOrderDelivery": return target.getPulsarConfiguration().isAllowOutOfOrderDelivery();
         case "authenticationclass":
         case "authenticationClass": return target.getPulsarConfiguration().getAuthenticationClass();
         case "authenticationparams":
@@ -226,6 +240,10 @@ public class PulsarEndpointConfigurer extends PropertyConfigurerSupport implemen
         case "exchangePattern": return target.getExchangePattern();
         case "initialsequenceid":
         case "initialSequenceId": return target.getPulsarConfiguration().getInitialSequenceId();
+        case "keysharedpolicy":
+        case "keySharedPolicy": return target.getPulsarConfiguration().getKeySharedPolicy();
+        case "keysharedranges":
+        case "keySharedRanges": return target.getPulsarConfiguration().getKeySharedRanges();
         case "lazystartproducer":
         case "lazyStartProducer": return target.isLazyStartProducer();
         case "maxpendingmessages":

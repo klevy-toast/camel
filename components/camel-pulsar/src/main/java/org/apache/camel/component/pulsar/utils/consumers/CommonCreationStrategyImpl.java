@@ -57,6 +57,10 @@ public final class CommonCreationStrategyImpl {
             builder.messageListener(new PulsarMessageListener(pulsarEndpoint, pulsarConsumer));
         }
 
+        if (endpointConfiguration.getKeySharedPolicy() != null) {
+            builder.keySharedPolicy(endpointConfiguration.getKeySharedPolicy());
+        }
+
         if (endpointConfiguration.getMaxRedeliverCount() != null) {
             DeadLetterPolicyBuilder policy = DeadLetterPolicy.builder()
                     .maxRedeliverCount(endpointConfiguration.getMaxRedeliverCount());

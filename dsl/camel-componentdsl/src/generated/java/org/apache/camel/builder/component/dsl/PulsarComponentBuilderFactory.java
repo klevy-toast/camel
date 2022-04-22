@@ -794,6 +794,7 @@ public interface PulsarComponentBuilderFactory {
             case "subscriptionName": getOrCreateConfiguration((PulsarComponent) component).setSubscriptionName((java.lang.String) value); return true;
             case "subscriptionTopicsMode": getOrCreateConfiguration((PulsarComponent) component).setSubscriptionTopicsMode((org.apache.pulsar.client.api.RegexSubscriptionMode) value); return true;
             case "subscriptionType": getOrCreateConfiguration((PulsarComponent) component).setSubscriptionType((org.apache.camel.component.pulsar.utils.consumers.SubscriptionType) value); return true;
+            case "keySharedPolicy": getOrCreateConfiguration((PulsarComponent) component).setKeySharedPolicy((org.apache.pulsar.client.api.KeySharedPolicy) value); return true;
             case "topicsPattern": getOrCreateConfiguration((PulsarComponent) component).setTopicsPattern((boolean) value); return true;
             case "pulsarMessageReceiptFactory": ((PulsarComponent) component).setPulsarMessageReceiptFactory((org.apache.camel.component.pulsar.PulsarMessageReceiptFactory) value); return true;
             case "batcherBuilder": getOrCreateConfiguration((PulsarComponent) component).setBatcherBuilder((org.apache.pulsar.client.api.BatcherBuilder) value); return true;
